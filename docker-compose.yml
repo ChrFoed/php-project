@@ -1,0 +1,58 @@
+version: '3.5'
+
+services:
+    frontend:
+      container_name: frontend  # Container name
+      build: ./frontend
+      volumes:
+        - './frontend:/usr/src/app'
+      ports:
+        - '4200:4200'
+      command: >
+        bash -c "npm install && ng serve --host 0.0.0.0 --port 4200"
+      links:
+        - backend:backend
+      networks:
+        - php-project
+    backend:
+      container_name: backend
+      build:
+        args:
+          user: admin
+          uid: 1000
+        context: backend
+        dockerfile: Dockerfile
+      restart: always
+      command: php artisan serve --host 0.0.0.0
+      environment:
+        - "PHP_DB_USER=php_project_admin"
+        - "PHP_DB_PASSWORD=va4uuKoojoki"
+        - "PHP_DB_DATABASE=php_project"
+      volumes:
+        - ./backend:/code
+      ports:
+        - '8000:8000'
+      links:
+        - database:database
+      depends_on:
+        - database
+      networks:
+        - php-project
+    database:
+      container_name: database
+      restart: always
+      environment:
+        - "PHP_DB_USER=php_project_admin"
+        - "PHP_DB_PASSWORD=va4uuKoojoki"
+        - "PHP_DB_DATABASE=php_project"
+        - "POSTGRES_PASSWORD=postgres"
+        - "POSTGRES_USER=postgres"
+      build: './db'
+      volumes:
+        - ./pgdata:/var/lib/postgresql/data
+      networks:
+        - php-project
+
+networks:
+  php-project:
+    name: php-project-network
