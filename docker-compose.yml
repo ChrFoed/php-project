@@ -29,7 +29,7 @@ services:
         - "PHP_DB_PASSWORD=va4uuKoojoki"
         - "PHP_DB_DATABASE=php_project"
       volumes:
-        - ./backend:/code
+        - ./backend:/backend
       ports:
         - '8000:8000'
       links:
