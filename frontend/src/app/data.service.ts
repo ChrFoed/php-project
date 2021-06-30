@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class DataService {
 
 
-  API = 'http://localhost:8000/';
+  API = 'http://localhost:8000/api';
 
   constructor(private http: HttpClient) { }
 
@@ -17,7 +17,11 @@ export class DataService {
     return this.http.get<any>(`${this.API}/products`);
   }
 
-  getProductById(String id) {
+  getProductsByVendor(vendor: String) {
+    return this.http.get<any>(`${this.API}/products/${vendor}`);
+  }
+
+  getProductById(id: String) {
     return this.http.get<any>(`${this.API}/products/${id}`);
   }
 

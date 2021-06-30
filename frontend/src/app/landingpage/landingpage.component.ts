@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DataService } from './../data.service';
 
 @Component({
   selector: 'app-landingpage',
@@ -7,9 +8,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingpageComponent implements OnInit {
 
-  constructor() { }
+  vendors: any[] = [{
+    label: "Amazon.de",
+    id: "amazon.de"
+  },
+  {
+    label: "Cyperport AT",
+    id: "cyperport"
+  }, {
+    label: "Cyperport AT",
+    id: "cyperport"
+  }]
 
-  ngOnInit(): void {
+  products: any[] = [];
+
+  constructor(private data: DataService) { }
+
+  // Angular 2 Life Cycle event when component has been initialized
+  ngOnInit() {
+    this.data.getProducts().subscribe((products: any) => {
+      console.log(products)
+    })
   }
 
 }
