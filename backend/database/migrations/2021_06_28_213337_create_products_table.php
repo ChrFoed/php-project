@@ -19,8 +19,10 @@ class CreateProductsTable extends Migration
             $table->string('identifier');
             $table->string('name');
             $table->string('description');
+            $table->string('vendor');
             $table->float('price');
             $table->float('targetprice');
+            $table->unique(['identifier', 'vendor', 'updated_at']);
         });
     }
 
