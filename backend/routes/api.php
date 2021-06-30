@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 
 use App\Http\Resources\ProductsResource;
+use App\Http\Controllers\ProductsController;
 use App\Models\Products;
 /*
 |--------------------------------------------------------------------------
@@ -21,10 +22,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 Route::get('/products', function () {
-    return new ProductsResource(Products::all());
+    return new ProductsResource(Products::getLastProductsState()->get());
 });
 
-// Route::get('/products', function () {
-//     return ProductsResource::collection(Products::all());
-// });
+Route::get('/products/{identifier}', function ($identifier) {
+    return new ProductsResource(Products::where('identifier', $identifier)->get());
+});
+
+Route::post('/products', [ProductsController::class, 'addProduct']);
+
+Route::delete('/products/{identifier}', [ProductsController::class, 'deleteProduct']);

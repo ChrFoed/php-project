@@ -14,4 +14,11 @@ class Products extends Model
     ];
 
     protected $dateFormat = 'Y-M-D HH:mm:00';
+
+    protected function getLastProductsState() {
+      return $this
+        ->distinct('identifier')
+        ->orderByDesc('identifier', 'updated_at');
+    }
+
 }
