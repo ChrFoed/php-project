@@ -1,1 +1,38 @@
-<p>product works!</p>
+<button (click)="showTimepoints();" mat-raised-button>{{ expandFlag ? 'Hide previous Timepoints' : 'Show previous Timepoints'}}</button>
+
+<div *ngIf="expandFlag">
+  <table mat-table [dataSource]="timepoints" matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="updated_at">
+      <th mat-header-cell *matHeaderCellDef> Update Timepoint </th>
+      <td mat-cell *matCellDef="let row"> {{row.updated_at}} </td>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef> Price </th>
+      <td mat-cell *matCellDef="let row"> {{row.price}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="targetprice">
+      <th mat-header-cell *matHeaderCellDef> Targetprice </th>
+      <td mat-cell *matCellDef="let row"> {{row.targetprice}} </td>
+    </ng-container>
+
+    <!-- Fruit Column -->
+    <ng-container matColumnDef="diff">
+      <th mat-header-cell *matHeaderCellDef> Difference </th>
+      <td mat-cell [ngClass]="evalPrice(row.targetprice,row.price)" *matCellDef="let row"> {{row.targetprice - row.price}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{productId}}"</td>
+    </tr>
+  </table>
+</div>

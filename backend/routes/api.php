@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Resources\ProductsResource;
 use App\Http\Controllers\ProductsController;
 use App\Models\Products;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -28,7 +29,7 @@ Route::get('/products', function () {
 });
 
 Route::get('/products/{identifier}', function ($identifier) {
-    return new ProductsResource(Products::where('identifier', $identifier)->get());
+    return new ProductsResource(Products::where('identifier', $identifier)->orderByDesc('updated_at')->get());
 });
 
 Route::post('/products', [ProductsController::class, 'addProduct']);

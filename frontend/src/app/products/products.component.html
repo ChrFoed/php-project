@@ -1,1 +1,16 @@
-<p>products works!</p>
+<div *ngFor="let product of products; let in = index">
+<mat-card>
+  <h2>{{product.name}}</h2>
+  <mat-card-content>
+    <p>{{product.description}}</p>
+  </mat-card-content>
+  <div class="priceoverview">
+    <h3 class="price"><b>{{product.price}} | </b>{{product.targetprice}}</h3>
+  </div>
+  <mat-card-actions class="buttons">
+    <button (click)="updateProduct(product);" mat-raised-button>Update</button>
+    <button (click)="deleteProduct(product.identifier);" mat-raised-button>Delete</button>
+  </mat-card-actions>
+</mat-card>
+<app-product1 [productId]="product.identifier"></app-product1>
+</div>

@@ -46,10 +46,10 @@ class ProductsSeeder extends Seeder
      */
     public function run()
     {
-      $timepoints = $this->iterateTimepoints();
-      foreach(self::IDENTIFIERS as $name => $metadata) {
-        foreach($this->iterateTimepoints() as $timepoint) {
-          DB::table('products')->insert([
+        $timepoints = $this->iterateTimepoints();
+        foreach (self::IDENTIFIERS as $name => $metadata) {
+            foreach ($this->iterateTimepoints() as $timepoint) {
+                DB::table('products')->insert([
             'identifier' => $metadata['id'],
             'price' => $metadata['value']+random_int($metadata['value']/10*-1, $metadata['value']/10*1),
             'targetprice' => $metadata['value'],
@@ -59,21 +59,23 @@ class ProductsSeeder extends Seeder
             'created_at' => $timepoint->format('Y-m-d H:00:00'),
             'vendor' => self::VENDOR
             ]);
+            }
         }
-      }
     }
 
 
-  /**
-  * Constructs an array of timepoints to simulate cronjobs
-  *
-  * @return array
-  */
-  protected function iterateTimepoints(int $iterators=2)
-  {
-    //For seeding data some timepoints in the past will be generated
-    $timepoints = [];
-    for ($i = 0; $i <= $iterators; $i++ ) { array_push($timepoints, CarbonImmutable::now()->sub(self::INTERVAL[1]*$i, self::INTERVAL[0]));}
-    return $timepoints;
-  }
+    /**
+    * Constructs an array of timepoints to simulate cronjobs
+    *
+    * @return array
+    */
+    protected function iterateTimepoints(int $iterators=200)
+    {
+        //For seeding data some timepoints in the past will be generated
+        $timepoints = [];
+        for ($i = 0; $i <= $iterators; $i++) {
+            array_push($timepoints, CarbonImmutable::now()->sub(self::INTERVAL[1]*$i, self::INTERVAL[0]));
+        }
+        return $timepoints;
+    }
 }

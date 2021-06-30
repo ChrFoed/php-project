@@ -13,7 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
-
+import { MatSortModule } from '@angular/material/sort';
+import { MatButtonModule } from '@angular/material/button';
 // Data Service
 import { DataService } from './data.service';
 
@@ -31,7 +32,9 @@ import { DataService } from './data.service';
     MatCardModule,
     MatTabsModule,
     MatTableModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSortModule,
+    MatButtonModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

@@ -10,25 +10,22 @@ export class LandingpageComponent implements OnInit {
 
   vendors: any[] = [{
     label: "Amazon.de",
-    id: "amazon.de"
+    id: "amazon"
   },
   {
     label: "Cyperport AT",
     id: "cyperport"
   }, {
-    label: "Cyperport AT",
-    id: "cyperport"
+    label: "E-Tec",
+    id: "etec"
   }]
-
-  products: any[] = [];
 
   constructor(private data: DataService) { }
 
   // Angular 2 Life Cycle event when component has been initialized
   ngOnInit() {
-    this.data.getProducts().subscribe((products: any) => {
-      console.log(products)
-    })
+    // this.data.getVendors().subscribe((vendors: any) => {
+    //   this.vendors = vendors.
+    // });
   }
-
 }
