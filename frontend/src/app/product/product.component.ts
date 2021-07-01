@@ -20,7 +20,7 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.productId)
-    this.data.getProductsByVendor(this.productId).subscribe((timepoints: any) => {
+    this.data.getProductById(this.productId).subscribe((timepoints: any) => {
       this.timepoints = timepoints['data'];
       console.log(this.timepoints)
     });
