@@ -28,7 +28,7 @@ class ProductsSeeder extends Seeder
      *
      * @var string
      */
-    protected const VENDOR = 'Amazon.de';
+    protected const VENDOR = 'amazon';
 
     /**
      * Determines the interval between the cronfetch for the testdata
