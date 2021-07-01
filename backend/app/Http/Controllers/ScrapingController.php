@@ -27,7 +27,7 @@ class ScrapingController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @param  Products  $users
+     * @param  Products  $products
      * @return void
      */
     public function __construct(Products $products)
@@ -35,7 +35,14 @@ class ScrapingController extends Controller
         $this->products = $products;
     }
 
-
+    /**
+     * scrape based on vendor
+     *
+     * @param  Request  $request
+     * @param  Vendor  $vendor
+     *
+     * @return void
+     */
     public function scrapPrice(Request $request=null, string $vendor='amazon')
     {
         $client = new Client();
