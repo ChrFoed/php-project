@@ -12,9 +12,21 @@ A cronjob driven crawler will check on a regulary base the state of the price an
 
 <h3>Setup</h3>
 
+To Setup the environment just execute buildApp.sh in the root directory. 
+Note: This is an development environment - so there are some php dependencies to install.
+
+After startup the frontend application is available under localhost:4200 (0.0.0.0).
+
 If Laravel is asking for an APP Key, don't excute artisan on your machine - generate the key inside your docker container:
 ```
 docker-compose exec backend php artisan key:generate
 docker-compose exec backend php artisan config:clear
 docker-compose exec backend php artisan config:cache
+```
+
+<h3> Testdata </h3>
+
+To add testdata execute:
+```
+./seedProducts.sh
 ```
