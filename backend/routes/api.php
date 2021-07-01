@@ -29,9 +29,9 @@ Route::get('/products', function () {
     return new ProductsResource(Products::getLastProductsState()->get());
 });
 
-// Route::get('/products/{vendorId}', function () {
-//     return new ProductsResource(Products::getProductsByVendor()->get());
-// });
+Route::get('/products/vendor/{vendorId}', function (string $vendorId) {
+    return new ProductsResource(Products::getProductsByVendor($vendorId)->get());
+});
 
 Route::get('/products/{identifier}', function (string $identifier) {
     return new ProductsResource(Products::where('identifier', $identifier)->orderByDesc('updated_at')->get());
