@@ -44,3 +44,5 @@ or just build the backend Docker via docker-compose. (sudo if the docker-compose
 ```
 docker-compose build backend
 ```
+
+A work-in-progress testsite is available under php.lonl.at.
