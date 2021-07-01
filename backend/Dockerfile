@@ -13,7 +13,8 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     zip \
     unzip \
-    libpq-dev
+    libpq-dev \
+    cron
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -30,7 +31,17 @@ RUN useradd -G www-data,root -u $uid -d /home/$user $user
 RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
 
+RUN touch /etc/cron.d/cron
+RUN chmod 0644 /etc/cron.d/cron
+RUN touch /var/log/cron.log
+
 WORKDIR /backend
+
 COPY . /backend
+
+COPY schedule/crontab /etc/cron.d/cjob
+RUN chmod 0644 /etc/cron.d/cjob
+
 RUN composer install
+
 EXPOSE 8000
