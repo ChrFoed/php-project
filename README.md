@@ -5,10 +5,18 @@
 The project should allow any user to track the price of an product on different vendor sites and to define an targetprice.
 A cronjob driven crawler will check on a regulary base the state of the price and will sent an email if it's below or near the targetprice.
 
+Steps to do:
+- Allow adding products by just enter an amazon product url
+- Frontend Polishing (more text and formattet timepoints in the corret timezones)
+- Allow update of some product properties like targetprice, description etc.
+- Support more then one vendor and remove testdata from others. 
+- Add Email notification (but before add basic user system)
+
 <h3>Prerequisite</h3>
 
 - Docker
 - Docker-compose
+- composer (2.1)
 
 <h3>Setup</h3>
 
@@ -45,4 +53,4 @@ or just build the backend Docker via docker-compose. (sudo if the docker-compose
 docker-compose build backend
 ```
 
-A work-in-progress testsite is soon (after fixing some ssl errors) available under https://php.lonl.at. 
+A work-in-progress testsite is available under https://php.lonl.at. 
