@@ -30,3 +30,17 @@ To add testdata execute:
 ```
 ./seedProducts.sh
 ```
+<h3> Cronjob </h3>
+
+The cronjob configuration is available under
+```
+/backend/schedule/cronjob
+```
+To deploy new configuration you have to rebuild the application via
+```
+./buildApp.sh
+```
+or just build the backend Docker via docker-compose. (sudo if the docker-compose deamon is not accessible from the current user=
+```
+docker-compose build backend
+```
