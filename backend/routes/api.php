@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Resources\ProductsResource;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\ScrapingController;
 use App\Models\Products;
 
 /*
@@ -28,10 +29,12 @@ Route::get('/products', function () {
     return new ProductsResource(Products::getLastProductsState()->get());
 });
 
-Route::get('/products/{identifier}', function ($identifier) {
+Route::get('/products/{identifier}', function (string $identifier) {
     return new ProductsResource(Products::where('identifier', $identifier)->orderByDesc('updated_at')->get());
 });
 
 Route::post('/products', [ProductsController::class, 'addProduct']);
 
 Route::delete('/products/{identifier}', [ProductsController::class, 'deleteProduct']);
+
+Route::get('/scraper/{vendorId}', [ScrapingController::class, 'scrapPrice']);

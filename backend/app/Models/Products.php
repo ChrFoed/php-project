@@ -10,15 +10,16 @@ class Products extends Model
     use HasFactory;
 
     protected $hidden = [
-        'id'
+        'id',
+        'url'
     ];
 
     protected $dateFormat = 'Y-M-D HH:mm:00';
 
-    protected function getLastProductsState() {
-      return $this
+    protected function getLastProductsState()
+    {
+        return $this
         ->distinct('identifier')
         ->orderByDesc('identifier', 'updated_at');
     }
-
 }
