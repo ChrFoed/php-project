@@ -45,4 +45,4 @@ or just build the backend Docker via docker-compose. (sudo if the docker-compose
 docker-compose build backend
 ```
 
-A work-in-progress testsite is available under https://php.lonl.at.
+A work-in-progress testsite is soon (after fixing some ssl errors) available under https://php.lonl.at. 
