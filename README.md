@@ -1,9 +1,9 @@
 <h1>Little Laravel Project</h1>
 
 <h3>Known Bugs</h3>
-- fetch for latest product state is buggy - some kind of randomness. Caching or query.
-- mobile not working properly
-- too much payload - PAGINATION!
+<p>- fetch for latest product state is buggy - some kind of randomness. Caching or query.<br>
+- mobile not working properly<br>
+- too much payload - PAGINATION!<br></p>
 
 <h3>Description</h3>
 
