@@ -1,5 +1,8 @@
 <h1>Little Laravel Project</h1>
 
+<h3>Known Bugs</h3>
+- fetch for latest product state is buggy - some kind of randomness. Caching or query.
+
 <h3>Description</h3>
 
 The project should allow any user to track the price of an product on different vendor sites and to define an targetprice.
