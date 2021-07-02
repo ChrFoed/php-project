@@ -7,7 +7,7 @@ A cronjob driven crawler will check on a regulary base the state of the price an
 
 Steps to do:
 - Allow adding products by just enter an amazon product url
-- Frontend Polishing (more text and formattet timepoints in the corret timezones)
+- Frontend Polishing (more text and formattet timepoints in the correct timezones, pagination)
 - Allow update of some product properties like targetprice, description etc.
 - Support more then one vendor and remove testdata from others.
 - Add Email notification (but before add basic user system)
