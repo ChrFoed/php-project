@@ -9,7 +9,7 @@ Steps to do:
 - Allow adding products by just enter an amazon product url
 - Frontend Polishing (more text and formattet timepoints in the corret timezones)
 - Allow update of some product properties like targetprice, description etc.
-- Support more then one vendor and remove testdata from others. 
+- Support more then one vendor and remove testdata from others.
 - Add Email notification (but before add basic user system)
 
 <h3>Prerequisite</h3>
@@ -18,9 +18,23 @@ Steps to do:
 - Docker-compose
 - composer (2.1)
 
+Check that your currentuser is part of the docker-group.
+
+<b>For linux users</b>
+```
+whoami
+sudo usermod -aG docker <user>
+# Test with executing docker
+docker
+```
+
+<b>For Mac users</b>
+It seems that docker and all user are default in the staff group. So no changes seems to be necessary.
+https://devilbox.discourse.group/t/is-adding-user-to-docker-group-still-needed-on-macos/391
+
 <h3>Setup</h3>
 
-To Setup the environment just execute buildApp.sh in the root directory. 
+To Setup the environment just execute buildApp.sh in the root directory.
 Note: This is an development environment - so there are some php dependencies to install.
 
 After startup the frontend application is available under localhost:4200 (0.0.0.0).
@@ -53,4 +67,4 @@ or just build the backend Docker via docker-compose. (sudo if the docker-compose
 docker-compose build backend
 ```
 
-A work-in-progress testsite is available under https://php.lonl.at. 
+A work-in-progress testsite is available under https://php.lonl.at.

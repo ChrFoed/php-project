@@ -1,10 +1,13 @@
 #!/bin/sh
 
-## Note: If you install docker & docker-compose for the right user - delete sudo
-sudo docker-compose down
+## Check if environemnt file exits
+[ ! -f ".env" ] && echo "Environment '.env' file for docker-compose doesn't exist" && exit 2;
+
+## Note: If an permission error occurs - check teh Readme for adding the current user to docker group
+docker-compose down
 ## Install vendor files
 composer install --working-dir=backend
 ## build docker environments
-sudo docker-compose up --build -d
+docker-compose up --build -d
 ## Start cron in backend container
-sudo docker exec backend cron
+docker exec backend cron

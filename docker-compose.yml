@@ -9,7 +9,7 @@ services:
       ports:
         - '4200:4200'
       command: >
-        bash -c "npm install && ng serve --host 0.0.0.0 --port 4200"
+        bash -c "npm install && ng serve --host 0.0.0.0 --port 4200 --disable-host-check"
       links:
         - backend:backend
       networks:
@@ -23,10 +23,11 @@ services:
         context: backend
         dockerfile: Dockerfile
       restart: always
+      env_file: .env
       command: php artisan serve --host 0.0.0.0
       environment:
-        - "PHP_DB_USER=php_project_admin"
-        - "PHP_DB_PASSWORD=va4uuKoojoki"
+        - "PHP_DB_USER=${PHP_DB_USER}"
+        - "PHP_DB_PASSWORD=${PHP_DB_PASSWORD}"
         - "PHP_DB_DATABASE=php_project"
       volumes:
         - ./backend:/backend
@@ -41,12 +42,11 @@ services:
     database:
       container_name: database
       restart: always
+      env_file: .env
       environment:
-        - "PHP_DB_USER=php_project_admin"
-        - "PHP_DB_PASSWORD=va4uuKoojoki"
+        - "PHP_DB_USER=${PHP_DB_USER}"
+        - "PHP_DB_PASSWORD=${PHP_DB_PASSWORD}"
         - "PHP_DB_DATABASE=php_project"
-        - "POSTGRES_PASSWORD=postgres"
-        - "POSTGRES_USER=postgres"
       build: './db'
       volumes:
         - ./pgdata:/var/lib/postgresql/data
