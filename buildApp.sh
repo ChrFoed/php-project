@@ -11,3 +11,5 @@ composer install --working-dir=backend
 docker-compose up --build -d
 ## Start cron in backend container
 docker exec backend cron
+# Migrate Database
+docker-compose exec backend php artisan migrate
