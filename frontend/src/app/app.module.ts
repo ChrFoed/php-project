@@ -17,13 +17,17 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
 // Data Service
 import { DataService } from './data.service';
+import { ShortUrlPipe } from './pipes/short-url.pipe';
+import { PriceDiffPipe } from './pipes/price-diff.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingpageComponent,
     ProductsComponent,
-    ProductComponent
+    ProductComponent,
+    ShortUrlPipe,
+    PriceDiffPipe
   ],
   imports: [
     BrowserModule,

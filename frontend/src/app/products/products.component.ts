@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
 import { DataService } from './../data.service';
+import { HelperService } from './../helper.service';
 
 @Component({
   selector: 'app-products',
@@ -12,14 +13,17 @@ export class ProductsComponent implements OnInit {
 
   products: any = [];
 
-  constructor(private data: DataService) { }
+  evalPrice: any;
+
+  constructor(private data: DataService, private helper: HelperService) {
+    this.evalPrice = this.helper.evalPrice;
+  }
 
   // Angular 2 Life Cycle event when component has been initialized
   ngOnInit() {
     console.log(this.vendorId);
-    this.data.getProductsByVendor(this.vendorId).subscribe((products: any) => {
+    this.data.getLastProductsStateByVendor(this.vendorId).subscribe((products: any) => {
       this.products = products['data'];
-      console.log(this.products)
     });
   }
 

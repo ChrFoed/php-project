@@ -3,9 +3,13 @@
   <h2>{{product.name}}</h2>
   <mat-card-content>
     <p>{{product.description}}</p>
+    <p>Link to product: <a href="{{ product.url }}" target="_blank" class="product-link">{{ product.url | shortUrl }}</a></p>
   </mat-card-content>
-  <div class="priceoverview">
-    <h3 class="price"><b>{{product.price}} | </b>{{product.targetprice}}</h3>
+  <div class="priceoverview" [ngClass]="evalPrice(product.targetprice,product.price)">
+    <h3 class="price">Current Price:
+      <b>{{product.price == 99999 ? "not in stock" : product.price }}{{product.price != 99999 ? "€":""}}</b>
+      <br>Desired price: <b>{{product.targetprice}}€</b><br>
+      <b>{{ product.targetprice | priceDiff:product.price }}</b></h3>
   </div>
   <mat-card-actions class="buttons">
     <button (click)="updateProduct(product);" mat-raised-button>Update</button>

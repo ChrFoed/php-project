@@ -44,8 +44,8 @@ export class DataService {
    * @param  vendor vendorId
    * @return        json
    */
-  getProductsByVendor(vendor: String) {
-    return this.http.get<any>(`${this.API}/products/vendor/${vendor}`);
+  getProductsByVendor(vendorId: String) {
+    return this.http.get<any>(`${this.API}/products/vendor/${vendorId}`);
   }
 
   /**
@@ -63,6 +63,15 @@ export class DataService {
    */
   getVendors() {
     return this.http.get<any>(`${this.API}/vendors`);
+  }
+
+  /**
+   * get Last State of Product by Vendor
+   * @param  vendorId String
+   * @return json
+   */
+  getLastProductsStateByVendor(vendorId: String) {
+    return this.http.get<any>(`${this.API}/products/vendor/last/${vendorId}`);
   }
 
 }

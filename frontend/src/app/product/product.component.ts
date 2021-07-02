@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from './../data.service';
+import { HelperService } from './../helper.service';
 
 @Component({
   selector: 'app-product1',
@@ -16,7 +17,12 @@ export class ProductComponent implements OnInit {
 
   displayedColumns = ['updated_at', 'price', 'targetprice', 'diff'];
 
-  constructor(private data: DataService) { }
+  evalPrice: any;
+
+
+  constructor(private data: DataService, private helper: HelperService) {
+    this.evalPrice = this.helper.evalPrice;
+  }
 
   ngOnInit(): void {
     console.log(this.productId)
@@ -30,14 +36,6 @@ export class ProductComponent implements OnInit {
     if (this.expandFlag) this.expandFlag = false;
     else this.expandFlag = true;
   }
-
-  evalPrice(target: Number, current: Number) {
-    if (current == 99999) return 'not-available';
-    if (target < current) return 'over-price';
-    if (target > current) return 'under-price';
-    return 'even-price';
-  }
-
 }
 
 // export class ProductComponent implements OnInit {
