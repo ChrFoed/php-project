@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
 import { DataService } from './../data.service';
 
 @Component({
@@ -16,7 +16,8 @@ export class ProductsComponent implements OnInit {
 
   // Angular 2 Life Cycle event when component has been initialized
   ngOnInit() {
-    this.data.getProducts().subscribe((products: any) => {
+    console.log(this.vendorId);
+    this.data.getProductsByVendor(this.vendorId).subscribe((products: any) => {
       this.products = products['data'];
       console.log(this.products)
     });

@@ -26,7 +26,7 @@ export class DataService {
   }
 
   getProductsByVendor(vendor: String) {
-    return this.http.get<any>(`${this.API}/products/${vendor}`);
+    return this.http.get<any>(`${this.API}/products/vendor/${vendor}`);
   }
 
   getProductById(id: String) {
