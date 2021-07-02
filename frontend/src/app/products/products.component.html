@@ -2,7 +2,7 @@
 <mat-card>
   <h2>{{product.name}}</h2>
   <mat-card-content>
-    <p>{{product.description}}</p>
+    <p>Last update: <b>{{product.updated_at | date:'d MMM y hh:mm:ss' }}</b></p>
     <p>Link to product: <a href="{{ product.url }}" target="_blank" class="product-link">{{ product.url | shortUrl }}</a></p>
   </mat-card-content>
   <div class="priceoverview" [ngClass]="evalPrice(product.targetprice,product.price)">
