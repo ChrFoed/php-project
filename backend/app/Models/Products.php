@@ -31,4 +31,12 @@ class Products extends Model
         ->distinct('identifier')
         ->where('vendor', $vendor);
     }
+
+    protected function getLastProductsByVendor(string $vendor)
+    {
+        return $this
+      ->distinct('identifier')
+      ->where('vendor', $vendor)
+      ->orderByDesc('identifier', 'updated_at');
+    }
 }

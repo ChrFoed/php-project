@@ -20,17 +20,28 @@ use App\Models\Products;
 |
 */
 
+/**
+ * [Route description]
+ * @var [type]
+ */
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
+/**
+ * get Last State of All Products
+ * @var json
+ */
 Route::get('/products', function () {
     return new ProductsResource(Products::getLastProductsState()->get());
 });
 
 Route::get('/products/vendor/{vendorId}', function (string $vendorId) {
     return new ProductsResource(Products::getProductsByVendor($vendorId)->get());
+});
+
+Route::get('/products/vendor/last/{vendorId}', function (string $vendorId) {
+    return new ProductsResource(Products::getLastProductsByVendor($vendorId)->get());
 });
 
 Route::get('/products/{identifier}', function (string $identifier) {
