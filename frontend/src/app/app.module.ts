@@ -15,10 +15,12 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatSortModule } from '@angular/material/sort';
 import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 // Data Service
 import { DataService } from './data.service';
 import { ShortUrlPipe } from './pipes/short-url.pipe';
 import { PriceDiffPipe } from './pipes/price-diff.pipe';
+import { AddProductComponent } from './add-product/add-product.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { PriceDiffPipe } from './pipes/price-diff.pipe';
     ProductsComponent,
     ProductComponent,
     ShortUrlPipe,
-    PriceDiffPipe
+    PriceDiffPipe,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ import { PriceDiffPipe } from './pipes/price-diff.pipe';
     MatTableModule,
     HttpClientModule,
     MatSortModule,
-    MatButtonModule
+    MatButtonModule,
+    MatIconModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

@@ -9,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class DataService {
 
 
-  API = 'http://localhost:8000/api';
+  API = 'https://backend:8000/api';
 
   constructor(private http: HttpClient) { }
 

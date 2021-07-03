@@ -1,6 +1,6 @@
 <div class="landingpage">
   <h1 class="landingpage-title">Pricetracker</h1>
-  <mat-tab-group animationDuration="10ms">
+  <mat-tab-group class="slider" animationDuration="10ms">
     <mat-tab *ngFor="let vendor of vendors; let in = index" [label]="vendor.label">
     <ng-template matTabContent>
         <app-products [vendorId]="vendor.id"></app-products>
