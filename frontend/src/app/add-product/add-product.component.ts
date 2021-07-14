@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { AddProductDialogComponent } from './add-product-dialog/add-product-dialog.component';
+
 
 @Component({
   selector: 'app-add-product',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddProductComponent implements OnInit {
 
-  constructor() { }
+  @Input() public vendorId: String = 'all';
+
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
+  }
+
+  addProduct() {
+    this.dialog.open(AddProductDialogComponent, {
+      data: {
+        vendor: 'amazon'
+      }
+    });
   }
 
 }
