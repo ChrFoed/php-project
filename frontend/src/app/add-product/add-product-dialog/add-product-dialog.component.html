@@ -1,3 +1,53 @@
 <h1 mat-dialog-title>Add new Product</h1>
 <div mat-dialog-content>
+  <mat-stepper orientation="vertical" [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Add Url of amazon product</ng-template>
+        <p>
+          <mat-form-field disabled appearance="fill">
+            <mat-label>Vendor</mat-label>
+            <input matInput readonly placeholder="Vendorname" formControlName="vendor" required>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field disabled appearance="fill">
+            <mat-label>Url</mat-label>
+            <input matInput placeholder="Url" formControlName="url" required>
+          </mat-form-field>
+        </p>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+      <form [formGroup]="secondFormGroup">
+        <ng-template matStepLabel>Fill out targetvalue and descriptiom</ng-template>
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Targetprice</mat-label>
+            <input matInput placeholder="targetprice" formControlName="targetprice" required>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="fill">
+            <mat-label>Description</mat-label>
+            <input matInput placeholder="Lorem Ipsum" formControlName="description" required>
+          </mat-form-field>
+        </p>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button mat-dialog-close (click)="addProduct()">Add Product</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
 </div>

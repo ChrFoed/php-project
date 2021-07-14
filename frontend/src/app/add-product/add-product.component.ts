@@ -17,12 +17,17 @@ export class AddProductComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addProduct() {
+  openDialog() {
     this.dialog.open(AddProductDialogComponent, {
       data: {
-        vendor: 'amazon'
+        vendor: 'amazon',
+        url: '',
+        targetprice: 1,
+        description: ''
       }
     });
+
+
   }
 
 }

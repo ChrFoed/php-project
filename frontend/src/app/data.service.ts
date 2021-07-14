@@ -40,6 +40,15 @@ export class DataService {
   }
 
   /**
+   * add Product by productId
+   * @param  payload product object
+   * @return HttpResponse
+   */
+  addProduct(payload: Object) {
+    return this.http.put<any>(`${this.API}/products`, payload);
+  }
+
+  /**
    * returns products linked to vendorId
    * @param  vendor vendorId
    * @return        json
