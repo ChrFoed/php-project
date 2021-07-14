@@ -31,10 +31,10 @@ class ScrapingController extends Controller
      * @param  Products  $products
      * @return void
      */
-    public function __construct(Products $products)
+    public function __construct(Products $products, Client $client)
     {
         $this->products = $products;
-        $this->client = new Client();
+        $this->client = $client;
         $this->client->setServerParameter('HTTP_USER_AGENT', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36');
         $this->client->setServerParameter('HTTP_ACCEPT_LANGUAGE', 'de-DE');
     }

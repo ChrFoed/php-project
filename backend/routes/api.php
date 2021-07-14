@@ -48,7 +48,9 @@ Route::get('/products/{identifier}', function (string $identifier) {
     return new ProductsResource(Products::where('identifier', $identifier)->orderByDesc('updated_at')->get());
 });
 
-Route::post('/products', [ProductsController::class, 'addProduct']);
+Route::post('/products', [ProductsController::class, 'updateProduct']);
+
+Route::put('/products', [ProductsController::class, 'addProduct']);
 
 Route::delete('/products/{identifier}', [ProductsController::class, 'deleteProduct']);
 

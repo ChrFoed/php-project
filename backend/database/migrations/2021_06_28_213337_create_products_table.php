@@ -17,10 +17,10 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->timestamps();
             $table->string('identifier');
-            $table->string('name');
-            $table->string('description');
+            $table->text('name');
+            $table->text('description');
             $table->string('vendor');
-            $table->string('url');
+            $table->text('url');
             $table->float('price');
             $table->float('targetprice');
             $table->unique(['identifier', 'vendor', 'updated_at']);
