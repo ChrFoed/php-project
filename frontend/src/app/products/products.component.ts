@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { DataService } from './../data.service';
 import { HelperService } from './../helper.service';
 
@@ -28,11 +28,21 @@ export class ProductsComponent implements OnInit {
   }
 
   updateProduct(product: any) {
-    console.log({ 'update': product })
+    this.data.updateProduct(product).subscribe((response: Object) => {
+      console.log(response);
+    });
   }
 
   deleteProduct(identifier: String) {
-    console.log({ 'delete': identifier })
+    this.data.deleteProduct(identifier).subscribe((response: Object) => {
+      console.log(response);
+    });
+  }
+
+  fetchProduct(identifier: String) {
+    this.data.scrapProductById(this.vendorId, identifier).subscribe((response: Object) => {
+      console.log(response);
+    });
   }
 
 }

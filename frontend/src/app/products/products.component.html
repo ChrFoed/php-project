@@ -12,6 +12,7 @@
       <b>{{ product.targetprice | priceDiff:product.price }}</b></h3>
   </div>
   <mat-card-actions class="buttons">
+    <button (click)="fetchProduct(product.identifier);" mat-raised-button>Fetch</button>
     <button (click)="updateProduct(product);" mat-raised-button>Update</button>
     <button (click)="deleteProduct(product.identifier);" mat-raised-button>Delete</button>
   </mat-card-actions>

@@ -26,8 +26,8 @@ export class DataService {
    * @param  id productId
    * @return  HttpResponse
    */
-  deleteProduct(id: String) {
-    return this.http.delete<any>(`${this.API}/products/${id}`);
+  deleteProduct(identifier: String) {
+    return this.http.delete<any>(`${this.API}/products/${identifier}`);
   }
 
   /**
@@ -81,6 +81,16 @@ export class DataService {
    */
   getLastProductsStateByVendor(vendorId: String) {
     return this.http.get<any>(`${this.API}/products/vendor/last/${vendorId}`);
+  }
+
+  /**
+   * scraps Product by Identifier
+   * @param  vendorId  [description]
+   * @param  identifer [description]
+   * @return           [description]
+   */
+  scrapProductById(vendorId: String, identifer: String) {
+    return this.http.get<any>(`${this.API}/scraper/${vendorId}/${identifer}`);
   }
 
 }
