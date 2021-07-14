@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b222afac5f56f971131d2a36dfd1e33c",
+    "content-hash": "0f0d9a8d0f6e70e2370b447b1f831d59",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -117,6 +117,62 @@
                 }
             ],
             "time": "2021-01-20T22:51:39+00:00"
+        },
+        {
+            "name": "datajoe/postgresql-distinct-on",
+            "version": "1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://bitbucket.org/datajoe/postgresql-distinct-on.git",
+                "reference": "2b271a8f2a28e32e06682bb95380783b8fc35d22"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://bitbucket.org/datajoe/postgresql-distinct-on/get/2b271a8f2a28e32e06682bb95380783b8fc35d22.zip",
+                "reference": "2b271a8f2a28e32e06682bb95380783b8fc35d22",
+                "shasum": ""
+            },
+            "require": {
+                "ext-pdo": "*",
+                "laravel/framework": "^5.0|^6.0|^7.0|^8.0",
+                "php": "^7.4"
+            },
+            "require-dev": {
+                "slevomat/coding-standard": "~5.0",
+                "squizlabs/php_codesniffer": "3.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DataJoe\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jacob Fogg",
+                    "email": "jacob@datjoe.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Provides support for the postgresql specific distinct on feature for Laravel. Compatible with versions 5 through 8.",
+            "homepage": "https://www.datajoe.com",
+            "keywords": [
+                "datajoe",
+                "distinct on",
+                "eloquent",
+                "laravel",
+                "postgres",
+                "postgresql",
+                "psql"
+            ],
+            "support": {
+                "source": "https://bitbucket.org/datajoe/postgresql-distinct-on/src/2b271a8f2a28e32e06682bb95380783b8fc35d22/?at=1.1.0"
+            },
+            "time": "2020-09-11T17:41:24+00:00"
         },
         {
             "name": "doctrine/inflector",

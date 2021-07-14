@@ -6,6 +6,7 @@ use App\Models\Products;
 use Illuminate\Http\Request;
 use Goutte\Client;
 use Carbon\CarbonImmutable;
+use Illuminate\Http\Request as DefaultRequest;
 
 class ScrapingController extends Controller
 {
@@ -33,6 +34,9 @@ class ScrapingController extends Controller
     public function __construct(Products $products)
     {
         $this->products = $products;
+        $this->client = new Client();
+        $this->client->setServerParameter('HTTP_USER_AGENT', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36');
+        $this->client->setServerParameter('HTTP_ACCEPT_LANGUAGE', 'de-DE');
     }
 
     /**
@@ -41,24 +45,27 @@ class ScrapingController extends Controller
      * @param  Request  $request
      * @param  Vendor  $vendor
      *
-     * @return void
+    * @return HttpResponse
      */
     public function scrapPrice(Request $request=null, string $vendor='amazon')
     {
-        $client = new Client();
-        $client->setServerParameter('HTTP_USER_AGENT', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36');
-        $client->setServerParameter('HTTP_ACCEPT_LANGUAGE', 'de-DE');
         $products = $this->products::getProductsByVendor('amazon')->get();
         foreach ($products as $product) {
             $updateProduct = $product->toArray();
-            $crawler = $client->request('GET', $product['url']);
+            $crawler = $this->client->request('GET', $product['url']);
             $price = $crawler->filter('#priceblock_ourprice')->each(function ($node) {
                 return floatval($node->text());
             });
+            if (!isset($price[0])) {
+                $price = $crawler->filter('#priceblock_pospromoprice')->each(function ($node) {
+                    return floatval($node->text());
+                });
+            }
             unset($updateProduct['created_at']);
             $updateProduct['updated_at'] = CarbonImmutable::now()->format('Y-m-d H:m:s');
             $updateProduct['price'] = intval(isset($price[0]) ? $price[0] : floatval(99999));
             $this->products::updateOrCreate($updateProduct);
+            return response('Vendorgroup fetched', 200)->header('Content-Type', 'text/plain');
         }
     }
 }
