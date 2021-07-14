@@ -54,4 +54,6 @@ Route::put('/products', [ProductsController::class, 'addProduct']);
 
 Route::delete('/products/{identifier}', [ProductsController::class, 'deleteProduct']);
 
-Route::get('/scraper/{vendorId}', [ScrapingController::class, 'scrapPrice']);
+Route::get('/scraper/{vendorId}', [ScrapingController::class, 'scrapPriceByVendor']);
+
+Route::get('/scraper/{vendorId}/{identifier}', [ScrapingController::class, 'scrapPriceByIdentifier']);

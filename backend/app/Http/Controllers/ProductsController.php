@@ -65,7 +65,6 @@ class ProductsController extends Controller
     */
     public function deleteProduct(Request $request, $identifier)
     {
-        var_dump($identifier);
         $this->products->where('identifier', $identifier)->delete();
         return response('Product removed Database', 200)
                    ->header('Content-Type', 'text/plain');
