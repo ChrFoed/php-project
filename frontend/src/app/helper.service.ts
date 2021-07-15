@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class HelperService {
 
   urlParts: RegExp = /(?<!\?.+)(?<=\/)[\w-]+(?=[/\r\n?]|$)/g;
+  routeOnly: RegExp = /(^[^?]+)/;
 
   constructor() { }
 
@@ -23,5 +24,13 @@ export class HelperService {
       result['identifier'] = matches[2][0];
     }
     return result;
+  }
+
+  cleanUrl(vendor: string, url: string): any {
+    let match = url.match(this.routeOnly);
+    while (match != null) {
+      return match[0];
+    }
+    return url;
   }
 }

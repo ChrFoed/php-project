@@ -55,6 +55,7 @@ export class AddProductDialogComponent implements OnInit {
     productData = {
       ...this.helperService.evalUrlContent(productData.vendor, matches), ...productData
     };
+    productData.url = this.helperService.cleanUrl(productData.vendor, productData.url);
     this.dataService.addProduct(productData).subscribe((response: Object) => {
       console.log(response)
     });
