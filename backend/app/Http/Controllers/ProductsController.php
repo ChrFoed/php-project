@@ -39,8 +39,7 @@ class ProductsController extends Controller
         $product = $request->all();
         $product['price'] = 99999;
         $this->products->create($product);
-        return response(sprintf('Product %s added to Database', $product['name']), 200)
-                  ->header('Content-Type', 'text/plain');
+        return response()->json(['message' => sprintf('Product with name "%s" added to database', $product['name'])], 200)->header('Content-Type', 'application/json');
     }
 
     /**
@@ -53,8 +52,7 @@ class ProductsController extends Controller
     {
         $product = $request->all();
         $this->products->whereIn('identifier', [$product['identifier']])->update($product);
-        return response(sprintf('Product "%s" updated in Database', $product['name']), 200)
-                   ->header('Content-Type', 'text/plain');
+        return response()->json(['message' => sprintf('Product with name "%s" updated', $product['name'])], 200)->header('Content-Type', 'application/json');
     }
 
     /**
@@ -66,7 +64,6 @@ class ProductsController extends Controller
     public function deleteProduct(Request $request, $identifier)
     {
         $this->products->where('identifier', $identifier)->delete();
-        return response(sprintf('Product "%s" removed from Database', $identifier), 200)
-                   ->header('Content-Type', 'text/plain');
+        return response()->json(['message' => sprintf('Product with identifier "%s" deleted', $identifier)], 200)->header('Content-Type', 'application/json');
     }
 }

@@ -58,7 +58,7 @@ class ScrapingController extends Controller
             $updateProduct['price'] = intval(isset($price[0]) ? $price[0] : floatval(99999));
             $this->products::updateOrCreate($updateProduct);
         }
-        return response(sprintf('Vendorgroup %s fetched', $vendor), 200)->header('Content-Type', 'text/plain');
+        return response()->json(['message' => sprintf('Vendorgroup %s fetched', $vendor)], 200)->header('Content-Type', 'application/json');
     }
 
     /**
@@ -79,7 +79,7 @@ class ScrapingController extends Controller
             $updateProduct['price'] = intval(isset($price[0]) ? $price[0] : floatval(99999));
             $this->products::updateOrCreate($updateProduct);
         }
-        return response(sprintf('Product with identifier %s fetched', $identifier), 200)->header('Content-Type', 'text/plain');
+        return response()->json(['message' => sprintf('Product with identifier %s fetched', $identifier)], 200)->header('Content-Type', 'application/json');
     }
 
     /**
