@@ -39,7 +39,7 @@ class ProductsController extends Controller
         $product = $request->all();
         $product['price'] = 99999;
         $this->products->create($product);
-        return response('Product added to Database', 200)
+        return response(sprintf('Product %s added to Database', $product['name']), 200)
                   ->header('Content-Type', 'text/plain');
     }
 
@@ -53,7 +53,7 @@ class ProductsController extends Controller
     {
         $product = $request->all();
         $this->products->whereIn('identifier', [$product['identifier']])->update($product);
-        return response('Product updated in Database', 200)
+        return response(sprintf('Product "%s" updated in Database', $product['name']), 200)
                    ->header('Content-Type', 'text/plain');
     }
 
@@ -66,7 +66,7 @@ class ProductsController extends Controller
     public function deleteProduct(Request $request, $identifier)
     {
         $this->products->where('identifier', $identifier)->delete();
-        return response('Product removed Database', 200)
+        return response(sprintf('Product "%s" removed from Database', $identifier), 200)
                    ->header('Content-Type', 'text/plain');
     }
 }

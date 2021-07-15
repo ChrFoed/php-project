@@ -57,8 +57,8 @@ class ScrapingController extends Controller
             $updateProduct['updated_at'] = CarbonImmutable::now()->format('Y-m-d H:m:s');
             $updateProduct['price'] = intval(isset($price[0]) ? $price[0] : floatval(99999));
             $this->products::updateOrCreate($updateProduct);
-            return response('Vendorgroup fetched', 200)->header('Content-Type', 'text/plain');
         }
+        return response(sprintf('Vendorgroup %s fetched', $vendor), 200)->header('Content-Type', 'text/plain');
     }
 
     /**
@@ -78,8 +78,8 @@ class ScrapingController extends Controller
             $updateProduct['updated_at'] = CarbonImmutable::now()->format('Y-m-d H:m:s');
             $updateProduct['price'] = intval(isset($price[0]) ? $price[0] : floatval(99999));
             $this->products::updateOrCreate($updateProduct);
-            return response('Vendorgroup fetched', 200)->header('Content-Type', 'text/plain');
         }
+        return response(sprintf('Product with identifier %s fetched', $identifier), 200)->header('Content-Type', 'text/plain');
     }
 
     /**
