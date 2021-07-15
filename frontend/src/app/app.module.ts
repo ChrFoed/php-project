@@ -27,6 +27,9 @@ import { ShortUrlPipe } from './pipes/short-url.pipe';
 import { PriceDiffPipe } from './pipes/price-diff.pipe';
 import { AddProductComponent } from './add-product/add-product.component';
 import { AddProductDialogComponent } from './add-product/add-product-dialog/add-product-dialog.component';
+// External Components
+import { ToastrModule } from 'ngx-toastr';
+
 
 @NgModule({
   declarations: [
@@ -55,7 +58,8 @@ import { AddProductDialogComponent } from './add-product/add-product-dialog/add-
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot()
   ],
   providers: [DataService],
   bootstrap: [AppComponent]

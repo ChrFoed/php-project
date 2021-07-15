@@ -28,7 +28,6 @@ export class ProductComponent implements OnInit {
     console.log(this.productId)
     this.data.getProductById(this.productId).subscribe((timepoints: any) => {
       this.timepoints = timepoints['data'];
-      console.log(this.timepoints)
     });
   }
 

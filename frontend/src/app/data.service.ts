@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from './../environments/environment';
 
 @Injectable({
@@ -8,6 +8,8 @@ import { environment } from './../environments/environment';
 
 
 export class DataService {
+
+  headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   API = `${environment.apiUrl}/api`;
 
@@ -42,10 +44,10 @@ export class DataService {
   /**
    * add Product by productId
    * @param  payload product object
-   * @return HttpResponse
+   * @return json
    */
   addProduct(payload: Object) {
-    return this.http.put<any>(`${this.API}/products`, payload);
+    return this.http.put<any>(`${this.API}/products`, payload, { 'headers': this.headers, 'responseType': 'json' });
   }
 
   /**

@@ -3,6 +3,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from './../../data.service';
 import { HelperService } from './../../helper.service';
+import { NotificationsService } from './../../notifications.service';
+import { NotificationType } from './../../notifications';
 
 export interface DialogData {
   vendor: 'amazon' | 'cyberport' | 'etec';
@@ -10,6 +12,7 @@ export interface DialogData {
   targetprice: 0;
   description: ""
 }
+
 
 @Component({
   selector: 'app-add-product-dialog',
@@ -26,7 +29,8 @@ export class AddProductDialogComponent implements OnInit {
 
 
 
-  constructor(private _formBuilder: FormBuilder, protected dataService: DataService, protected helperService: HelperService, public dialogRef: MatDialogRef<AddProductDialogComponent>,
+  constructor(private _formBuilder: FormBuilder, protected dataService: DataService,
+    protected helperService: HelperService, public dialogRef: MatDialogRef<AddProductDialogComponent>, private notificationsService: NotificationsService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
     this.firstFormGroup = this._formBuilder.group({
       vendor: [this.data.vendor, Validators.required],
@@ -57,7 +61,7 @@ export class AddProductDialogComponent implements OnInit {
     };
     productData.url = this.helperService.cleanUrl(productData.vendor, productData.url);
     this.dataService.addProduct(productData).subscribe((response: Object) => {
-      console.log(response)
+      this.notificationsService.createMessage({ message: 'Product added to database', type: NotificationType.success });
     });
   }
 }
