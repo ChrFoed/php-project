@@ -6,7 +6,9 @@ use App\Models\Products;
 use Illuminate\Http\Request;
 use Goutte\Client;
 use Carbon\CarbonImmutable;
-use Illuminate\Http\Request as DefaultRequest;
+use Symfony\Component\HttpClient\HttpClient;
+
+#use Illuminate\Http\Request as DefaultRequest;
 
 class ScrapingController extends Controller
 {
@@ -26,17 +28,35 @@ class ScrapingController extends Controller
     protected $products;
 
     /**
+     * Some Proxy Servers
+     * https://www.netzwelt.de/proxy/index.html
+     * @var Array
+     */
+    protected $proxies = [ '85.28.193.95:8080', '85.214.250.48:3128', '85.214.81.21:8080'];
+
+
+    /**
      * Create a new controller instance.
      *
      * @param  Products  $products
      * @return void
      */
-    public function __construct(Products $products, Client $client)
+    public function __construct(Products $products)
     {
         $this->products = $products;
-        $this->client = $client;
-        $this->client->setServerParameter('HTTP_USER_AGENT', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36');
-        $this->client->setServerParameter('HTTP_ACCEPT_LANGUAGE', 'de-DE');
+    }
+
+
+    protected function getCrawlerClient()
+    {
+        #$proxy = $this->proxies[mt_rand(0, count($this->proxies)-1)];
+        #$client = new Client(HttpClient::create(['proxy' => $proxy, 'timeout' => 60]));
+        $client = new Client(HttpClient::create(['timeout' => 60]));
+        $client->followRedirects();
+        $client->setServerParameter('HTTP_USER_AGENT', 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36');
+        $client->setServerParameter('HTTP_ACCEPT_LANGUAGE', 'de-DE');
+        $client->setServerParameter('HTTP_REFERER', 'https://www.google.com/');
+        return $client;
     }
 
     /**
@@ -91,7 +111,10 @@ class ScrapingController extends Controller
     protected function getPriceFromPage(string $url, string $vendor)
     {
         $price = 99999;
-        $crawler = $this->client->request('GET', $url);
+        $client = $this->getCrawlerClient();
+        $crawler = $client->request('GET', $url.$this->generateQueryParam());
+
+        sleep(1);
         if ($vendor == 'amazon') {
             $price = $crawler->filter('#priceblock_ourprice')->each(function ($node) {
                 return floatval($node->text());
@@ -108,5 +131,14 @@ class ScrapingController extends Controller
             }
         }
         return $price;
+    }
+
+    /**
+     * generate 'randopm' query params
+     * @return string unix_timestamp query
+     */
+    protected function generateQueryParam()
+    {
+        return sprintf("?time=%s", strval(strtotime("now")));
     }
 }
